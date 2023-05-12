@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+    <link rel="stylesheet" href="s.css">
+    <link rel="stylesheet" href="css/style.css">
+
+</head>
+
+<body>
+
+    <a href=# class="buttonpop  p2"><img src="icons/search-interface-symbol.png" alt="" width="25px"> </a>
+    <div class="viewport v1">
+        <div class="scrollbase">
+            <div class="longpopup pop2">
+                <input type="search" id="search-medicine" name="search-medicine" class="form-control search-text"
+                    placeholder="Search Medicine" autocomplete="off" style="display: inline;" spellcheck="false">
+                <section class="search" id="search-bar bjsbfwej">
+                    <div class="container">
+                        <div class="row">
+                            <div>
+                                <div class="search-item">
+                                    <h3>Found items</h3>
+                                    <ul id="dino-list" class="list-unstyled" style="padding-left: 0;">
+                                        <li data-img="medicine/crosin1.webp">
+                                            <div class="search-card">
+                                                <img src="medicine/crosin1.webp" alt="Stegosaurus" class="img-fluid" />
+                                                <p>Crosin</p>
+                                            </div>
+                                        </li>
+                                        <li data-img="medicine/crosin2.webp">
+                                            <div class="search-card">
+                                                <img src="medicine/crosin2.webp" alt="Stegosaurus" class="img-fluid" />
+                                                <p>Crosin</p>
+                                            </div>
+                                        </li>
+                                        <li data-img="medicine/dolo1.jpg">
+                                            <div class="search-card">
+                                                <img src="medicine/dolo1.jpg" alt="Stegosaurus" class="img-fluid" />
+                                                <p>Dolo</p>
+                                            </div>
+                                        </li>
+                                        <li data-img="medicine/dolo2.webp">
+                                            <div class="search-card">
+                                                <img src="medicine/dolo2.webp" alt="Stegosaurus" class="img-fluid" />
+                                                <p>Dolo 650</p>
+                                            </div>
+                                        </li>
+                                        <li data-img="medicine/dolo3.webp">
+                                            <div class="search-card">
+                                                <img src="medicine/dolo3.webp" alt="Stegosaurus" class="img-fluid" />
+                                                <p>Dolo 650</p>
+                                            </div>
+                                        </li>
+                                        <li data-img="medicine/dolo4.webp">
+                                            <div class="search-card">
+                                                <img src="medicine/dolo4.webp" alt="" class="img-fluid" />
+                                                <p>Dolo 650</p>
+                                            </div>
+                                        </li>
+                                        <li data-img="medicine/pan1.jpg">
+                                            <div class="search-card">
+                                                <img src="medicine/pan1.jpg" alt="" class="img-fluid" />
+                                                <p>Pantop DSR</p>
+                                            </div>
+                                        </li>
+                                        <li data-img="medicine/pan2.jpg">
+                                            <div class="search-card">
+                                                <img src="medicine/pan2.jpg" alt="Stegosaurus" class="img-fluid" />
+                                                <p>Pantop DSR</p>
+                                            </div>
+                                        </li>
+                                        <li data-img="medicine/pan3.jpg">
+                                            <div class="search-card">
+                                                <img src="medicine/pan3.jpg" alt="Stegosaurus" class="img-fluid" />
+                                                <p>Pantop DSR</p>
+                                            </div>
+                                        </li>
+                                        <li data-img="medicine/v1.jpg">
+                                            <div class="search-card">
+                                                <img src="medicine/v1.jpg" alt="" class="img-fluid" />
+                                                <p>Vitamin C</p>
+                                            </div>
+                                        </li>
+                                        <li data-img="">
+                                            <div class="search-card">
+                                                <img src="" alt="" class="img-fluid" />
+                                                <p>Vitamin E</p>
+                                            </div>
+                                        </li>
+                                        <li data-img="">
+                                            <div class="search-card">
+                                                <img src="" alt="" class="img-fluid" />
+                                                <p>Vitamin A</p>
+                                            </div>
+                                        </li>
+                                        <li data-img="medicine/v2.jpg">
+                                            <div class="search-card">
+                                                <img src="medicine/v2.jpg" alt="" class="img-fluid" />
+                                                <p>Vitamin C</p>
+                                            </div>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <a id="hide-btn"
+                        style="position: absolute; top: 0px; right: 20px; font-size: 40px; cursor: pointer;">&times;</a>
+
+                </section>
+            </div>
+        </div>
+    </div>
+    <script>$(function () {
+            $(".buttonpop").on('click', function () {
+
+                $("body").addClass("scrollable");
+                $(".viewport").addClass("scrollable");
+
+                $(".pop2").show();
+
+                pop();
+
+                return false;
+            });
+
+            $(".longpopup").click(function (event) {
+                event.stopPropagation();
+
+            });
+
+            $(".scrollbase").on('click', function () {
+                $("body").removeClass("scrollable");
+                $(".viewport").removeClass("scrollable");
+                $(".longpopup").hide();
+                return false;
+            });
+
+            $(window).resize(function () {
+                pop();
+            })
+        });</script>
+
+    <script>
+
+        // search box js start 
+
+
+
+        $(document).ready(function () {
+            /* initially hide product list items */
+            $("#dino-list li, .search").hide();
+
+            /* highlight matches text */
+            var highlight = function (string) {
+                $("#dino-list li.match").each(function () {
+                    var matchStart = $(this)
+                        .text()
+                        .toLowerCase()
+                        .indexOf("" + string.toLowerCase() + "");
+                    var matchEnd = matchStart + string.length - 1;
+                    var beforeMatch = $(this).text().slice(0, matchStart);
+                    var matchText = $(this).text().slice(matchStart, matchEnd + 1);
+                    var afterMatch = $(this).text().slice(matchEnd + 1);
+                    var imgSrc = $(this).data("img"); // get the image URL from the data-img attribute
+                    if (imgSrc === undefined || imgSrc === "") {
+                        imgSrc = "images/Default.webp"; // set default image URL if none specified
+                    }
+                    $(this).html(
+                        '<div class="search-card"><img src="' +
+                        imgSrc +
+                        '" class="dino-img" alt="' +
+                        $(this).text() +
+                        '"><p>' +
+                        beforeMatch +
+                        '<em>' +
+                        matchText +
+                        "</em>" +
+                        afterMatch +
+                        "</p></div>"
+                    );
+                });
+            };
+
+            /* filter products */
+            $("#search-medicine").on("keyup click input", function () {
+                if (this.value.length > 0) {
+                    $("#dino-list li,.search").removeClass("match").hide().filter(function () {
+                        return $(this).text().toLowerCase().indexOf($("#search-medicine").val().toLowerCase()) != -1;
+                    }).addClass("match").show();
+                    highlight(this.value);
+                    $("#dino-list,.search").show();
+                } else {
+                    $("#dino-list, #dino-list li, .search").removeClass("match").hide();
+                }
+            });
+
+
+        });
+// search box js end 
+    </script>
+    <script>
+        const hideBtn = document.getElementById('hide-btn');
+        const searchSection = document.getElementById('search-bar bjsbfwej');
+        hideBtn.addEventListener('click', () => {
+            searchSection.style.display = 'none';
+        });
+    </script>
+</body>
+
+
+</html>
