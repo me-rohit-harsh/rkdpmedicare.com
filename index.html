@@ -25,7 +25,6 @@
 </head>
 
 <body class="full-section">
-
     <section id="full-body">
         <div class="wrapper">
             <header>
@@ -331,7 +330,87 @@
         </div>
     </section>
     <!-- popup start contact form start  -->
+    <!-- Sending data over mail start using API -->
     <section class="contact-popup">
+        <div id="email-now-modal" class="popup_modal">
+            <div class="modal-content-popup">
+                <form action="https://api.web3forms.com/submit" method="POST" id="form" class="popup-form">
+                    <input type="hidden" name="access_key" value="49a7e9ae-a599-432a-ab55-2243b05686f8" />
+                    <input type="hidden" name="subject" value="New Submission from PopUp Contact Form " />
+                    <input type="checkbox" name="botcheck" id="" style="display: none;" />
+                    <span class="pop-close" id="pop-close">&times;</span>
+                    <h2>CONTACT US</h2>
+                    <p><input placeholder="Name" name="name" required></input></p>
+                    <p><input placeholder="Mobile Number" name="phone" required type="number"></input></p>
+                    <p><input placeholder="Email ID" name="email" type="email" required></input></p>
+                    <p><input placeholder="City/State" name="place" required></input></p>
+                    <p><input placeholder="Message" name="message" required></input></p>
+
+                    <button class="custom-btn btn-11" type="submit" value="Send Now" id="result">Send
+                        Message
+                        <div class="dot">
+                        </div>
+                    </button>
+                </form>
+            </div>
+        </div>
+    </section>
+    <!-- popup start contact form end  -->
+    <!-- script for sending data using API start-->
+    <script>
+        const form = document.getElementById("form");
+        const result = document.getElementById("result");
+
+        form.addEventListener("submit", function (e) {
+            const formData = new FormData(form);
+            e.preventDefault();
+            var object = {};
+            formData.forEach((value, key) => {
+                object[key] = value;
+            });
+            var json = JSON.stringify(object);
+            result.innerHTML = "Please wait...";
+
+            fetch("https://api.web3forms.com/submit", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                    Accept: "application/json"
+                },
+                body: json
+            })
+                .then(async (response) => {
+                    let json = await response.json();
+                    if (response.status == 200) {
+                        result.innerHTML = json.message;
+                        result.classList.remove("text-gray-500");
+                        result.classList.add("text-green-500");
+                    } else {
+                        console.log(response);
+                        result.innerHTML = json.message;
+                        result.classList.remove("text-gray-500");
+                        result.classList.add("text-red-500");
+                    }
+                })
+                .catch((error) => {
+                    console.log(error);
+                    result.innerHTML = "Something went wrong!";
+                })
+                .then(function () {
+                    form.reset();
+                    setTimeout(() => {
+                        // result.style.display = "none";
+                        result.innerHTML = "Send Message Again";
+                    }, 5000);
+                });
+        });
+    </script>
+    <!-- script for sending data using API end-->
+    <!-- Sending data over mail end using API -->
+
+
+    <!-- popup start contact form start  -->
+    <!-- <section class="contact-popup">
         <div id="email-now-modal" class="popup_modal ">
             <div class="modal-content-popup">
                 <form class="popup-form" method="post" action="connect1.php">
@@ -351,16 +430,15 @@
                 </form>
             </div>
         </div>
-
-    </section>
+    </section> -->
     <!-- popup start contact form end  -->
+
     <!-- search part start  -->
     <div class="viewport v1" id="serach-bar-cl">
         <div class="scrollbase">
             <div class="longpopup pop2">
                 <input type="search" id="search-medicine" name="search-medicine" class="form-control search-text"
-                    placeholder="Search Medicine" autocomplete="off" style="display: inline; margin-left: -50px;"
-                    spellcheck="false">
+                    placeholder="Search Medicine" autocomplete="off" style="display: inline;" spellcheck="false">
 
                 <section class="search" id="search-bar bjsbfwej">
                     <div class="container">
@@ -458,7 +536,7 @@
             </div>
             <div style="display: flex;
     justify-content: center; ">
-                <img src="icons/home.png" alt="" style="width: 35px; margin-left: 270px; margin-top:20px;z-index: 1;">
+                <img src="icons/home.png" alt="" style="width: 35px; margin-left: 320px; margin-top:20px;z-index: 1;">
             </div>
         </div>
     </div>
@@ -1391,6 +1469,62 @@
             <div class="row">
                 <div class="col-md-6">
                     <div class="contact-page-form" method="post">
+                        <!-- Sending data using API start -->
+                        <form action="https://api.web3forms.com/submit" method="POST" id="main-form">
+                            <input type="hidden" name="access_key" value="49a7e9ae-a599-432a-ab55-2243b05686f8" />
+                            <input type="hidden" name="subject" value="New Submission from main contact form" />
+                            <input type="checkbox" name="botcheck" id="" style="display: none;" />
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="single-input-field">
+                                        <input type="text" placeholder="Your Name" name="name" id="form-name"
+                                            required />
+                                    </div>
+                                </div>
+                                <div class="col-md-12">
+                                    <div class="single-input-field">
+                                        <input type="email" placeholder="E-mail" name="email" required
+                                            id="form-gmail-id" />
+                                    </div>
+                                </div>
+                                <div class="col-md-12">
+                                    <div class="single-input-field">
+                                        <input type="number" placeholder="Phone Number" name="phone" id="form-number"
+                                            required />
+                                    </div>
+                                </div>
+                                <div class="col-md-12 message-input">
+                                    <div class="single-input-field">
+                                        <textarea placeholder="Write Your Message" name="message"
+                                            style="min-height: 130px;" spellcheck="tr
+                                            " id="form-msg" required type="text"></textarea>
+                                    </div>
+                                </div>
+                                <div class="single-input-fieldsbtn" style="text-align: center;">
+                                    <button class="custom-btn btn-11" type="submit" style="margin-right: 0;"
+                                        value="Send Now" id="results">Send Now
+                                        <div class="dot"></div>
+                                    </button>
+                                </div>
+                            </div>
+                        </form>
+                        <!-- Sending data using API ends -->
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="contact-page-map">
+                        <div class="map">
+                            <div class="map__inner">
+                                <div id="js-map" class="map__canvas"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Uncomment this for normal behavior  and comment the above duplicate code -->
+            <!-- <div class="row">
+                <div class="col-md-6">
+                    <div class="contact-page-form" method="post">
                         <form action="connect.php" method="post">
                             <div class="row">
                                 <div class="col-md-12">
@@ -1421,7 +1555,6 @@
                                         value="Send Now">Send Now
                                         <div class="dot"></div>
                                     </button>
-                                    <!-- <input type="submit" value="Send Now" /> -->
                                 </div>
                             </div>
                         </form>
@@ -1436,9 +1569,53 @@
                         </div>
                     </div>
                 </div>
-            </div>
+            </div> -->
         </div>
     </section>
+    <!-- script for sending data using API start-->
+    <script>
+        const forms = document.getElementById("main-form");
+        const results = document.getElementById("results");
+        forms.addEventListener("submit", function (e) {
+            const formData = new FormData(forms);
+            e.preventDefault();
+            var object = {};
+            formData.forEach((value, key) => {
+                object[key] = value;
+            });
+            var json = JSON.stringify(object);
+            results.innerHTML = "Please wait...";
+
+            fetch("https://api.web3forms.com/submit", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                    Accept: "application/json"
+                },
+                body: json
+            })
+                .then(async (response) => {
+                    let json = await response.json();
+                    if (response.status == 200) {
+                        results.innerHTML = json.message;
+                    } else {
+                        console.log(response);
+                        results.innerHTML = json.message;
+                    }
+                })
+                .catch((error) => {
+                    console.log(error);
+                    results.innerHTML = "Something went wrong!";
+                })
+                .then(function () {
+                    forms.reset();
+                    setTimeout(() => {
+                        results.innerHTML = "Send Message Again"
+                    }, 5000);
+                });
+        });
+    </script>
+    <!-- script for sending data using API end-->
     <!-- get in touch end  -->
     <!-- gallery start  -->
 
